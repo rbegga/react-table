@@ -27,8 +27,10 @@ export default (Component, options) => {
       if (!row || !row.hasOwnProperty(this.props.keyField)) return null
       const { toggleSelection, selectType, keyField } = this.props
       const checked = this.props.isSelected(row[this.props.keyField])
+      const disabled = this.props.isDisabled(row[this.props.keyField])
       const inputProps = {
         checked,
+        disabled,
         onClick: toggleSelection,
         selectType,
         id: row[keyField],
@@ -100,6 +102,9 @@ export default (Component, options) => {
     keyField: '_id',
     isSelected: key => {
       console.log('No isSelected handler provided:', { key })
+    },
+    isDisabled: key => { 
+      return false;
     },
     selectAll: false,
     toggleSelection: (key, shift, row) => {
